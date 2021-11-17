@@ -1,0 +1,11 @@
+description: 'Http Unprocessable'
+content:
+  application/json:
+    schema:
+      type: string
+      example:
+        status: false
+        data: null
+        error:
+          code: 422
+          message: 'http_unprocessable'

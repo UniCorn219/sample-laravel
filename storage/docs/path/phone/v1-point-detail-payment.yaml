@@ -1,0 +1,19 @@
+get:
+  tags:
+    - Phone
+  security:
+    - bearerAuth: []
+  parameters:
+    - in: query
+      name: payment_id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: The payment_id
+  summary: Gets detail payment with CrawlPayment
+  responses:
+    200:
+      $ref: ../../response/200.yaml
+    401:
+      $ref: ../../response/401.yaml

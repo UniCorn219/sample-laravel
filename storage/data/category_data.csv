@@ -1,0 +1,43 @@
+Name EN,NAME KO,NAME VN,Description,Type,Image
+car accessory,자동차용품,phụ kiện xe hơi,"Bán các phụ kiện cho xe hơi như máy khử mùi, kẹp điện thoại v.v",1,car.png
+electronic/PC,디지털/가전/PC,Điện tử/gia dụng/PC,"Các đồ điện tử, gia dụng như máy giặt, máy là, đồ điện tử máy tính, điện thoại v.v",1,electronic.png
+Ticket/eCoupon,티켓/e쿠폰,Ticket/Coupon điện tử,"Các phiếu giảm giá hoặc ticket xem phim, hòa nhạc v.v",1,ecoupon.png
+Camping stuff,캠핑장비,Vật dụng liên quan tới camping,"Quốc, xẻng, lều, đèn pin, v.v",1,camping_stuff.png
+beauty,미용장비,"đồ dùng trang điểm, làm đẹp","mỹ phẩm, mặt nạ, son v.v",1,beauty.png
+Interior,인테리어/가구,Nội thất,"ghế, bàn, tranh ảnh v.v",1,interior.png
+Sport stuff,스포츠용품,Vật phẩm thể thao,"giày đá bóng, bọc đầu gối, vợt cầu lông v.v",1,sport_stuff.png
+Kickboard/bike/autobike,킥보드/자전거/오토바이,Kickboard/xe đạp/xe máy,đồ liên quan tới các loai sport bike,1,bike.png
+Kidult/Figure,키덜트/피규어,đồ chơi/cầm tay,"đồ cho cho con nít, hoặc người lớn như rubik",1,figure.png
+luxury goods/clothing,수입명품/의류,hàng hiệu nhập/quần áo,,1,luxury.png
+Travel products,여행상품,sản phẩm du lịch,"đồ lưu niệm, share lại vé máy bay v.v",1,travel.png
+book,도서,sách,,1,book.png
+Food/Nutrition,식품/영양제,thực phẩm/thực phẩm chức năng,"omega, sâm, thông đỏ v.v",1,food.png
+Baby,유아용품,sản phẩm trẻ em,,1,baby_product.png
+Other,기타,Khác,,1,other_2.png
+Phone purchase,휴대폰구매,mua phone,,2,phone_purchase.png
+Questions,우리동네 질문,,Các câu hỏi (đưa lên để những ng khác trả lời),2,questions.png
+Hot restaurent,동네맛집,,quán ngon,2,hot.png
+Daily,일상,,Nhật ký,2,daily.png
+Together,함께해요,,Cùng làm nào (vd: cùng dọn rác ở …),2,together.png
+Local news,동네소식,,Các thông tin quanh đây (cho mấy bà tám),2,local_news.png
+Lost and found,분실,,Tìm đồ thất lạc,2,lost_and_found.png
+Help,해주세요,,nhờ vả,2,help.png
+Hobby,취미생활,,Các thú vui,2,hobby.png
+Health,건강,,Sức khỏe,2,health.png
+Interior,인테리어,,Nội thát,2,interior_2.png
+Born/baby,출산/육아,,mới sinh / bé sơ sinh,2,baby.png
+Pet,반려동물,,Thú nuôi,2,pet.png
+financial management,제테크,,"Các mẹo quản lý tài chính, kiếm tiền",2,financial_management.png
+hospital,병원,,Bệnh viện,2,hospital.png
+Others,기타,,khác,2,local_post_others.png
+part-time job,동네알바,,công việc làm thêm gần đây,3,part_time_job.png
+Cafe,카페,,các quán cafe,3,coffee.png
+moving house,이사,,dịch vụ chuyển nhà,3,moving_house.png
+extra classes,과외,,Các khóa học thêm,3,extra_classes.png
+property,부동산,,"Bất động sản, thuê, bán nhà",3,property.png
+used car,중고차,,Xe cũ,3,used_car.png
+wash,세탁,,Giặt đồ,3,wash.png
+phone,휴대폰,,Cửa hàng Điện thoại,3,phone.png
+Shop promotion,가게홍보,,Quảng cáo cho shop,3,shop_promotion.png
+Beauty,뷰티,,Làm đẹp,3,local_info_beauty.png
+agro-fishery products,농수산물,,Thực phẩm nông nghiệp,3,agro_fishery_products.png

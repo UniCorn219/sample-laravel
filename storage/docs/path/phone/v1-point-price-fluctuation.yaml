@@ -1,0 +1,11 @@
+get:
+  tags:
+    - Phone
+  security:
+    - bearerAuth: []
+  summary: Gets price fluctuation if is_active
+  responses:
+    200:
+      $ref: ../../response/200.yaml
+    401:
+      $ref: ../../response/401.yaml

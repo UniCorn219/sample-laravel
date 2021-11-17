@@ -1,0 +1,11 @@
+get:
+  tags:
+    - Auth
+  security:
+    - bearerAuth: []
+  summary: Gets author profile
+  responses:
+    200:
+      $ref: ../../response/200.yaml
+    401:
+      $ref: ../../response/401.yaml

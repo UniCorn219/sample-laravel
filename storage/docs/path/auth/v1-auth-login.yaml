@@ -1,0 +1,27 @@
+post:
+  tags:
+    - Auth
+  summary: Login
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            phone:
+              type: integer
+              minimum: 1
+            pwd:
+              type: string
+            test:
+              type: string
+          example:
+            phone: 01021938168
+            pwd: 12345qwe
+            test: test
+  responses:
+    200:
+      $ref: ../../response/200.yaml
+    400:
+      $ref: ../../response/400.yaml

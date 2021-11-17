@@ -1,0 +1,100 @@
+image: alpine:3.13 # latest in 20210515
+
+definitions:
+  steps:
+    build: &build
+      name: Build
+      service: docker
+      caches:
+        - docker
+        - composer
+      script:
+        - export IMAGE_NAME=$ECR_NAME:$BITBUCKET_COMMIT
+        - apk add gettext
+        - apk add --no-cache bash git openssh
+        - git submodule update --init --recursive --remote
+        - cd database && git checkout $BITBUCKET_BRANCH && git pull origin $BITBUCKET_BRANCH && cd ..
+        - envsubst < .env.deployment > .env.example
+        - docker build -f deployment/docker/Dockerfile -t $IMAGE_NAME .
+        - pipe: atlassian/aws-ecr-push-image:1.3.0
+          variables:
+            IMAGE_NAME: $IMAGE_NAME
+            TAGS: ${BITBUCKET_COMMIT}
+
+    deploy: &deploy
+      name: Deploy
+      script:
+        - pipe: atlassian/aws-cloudformation-deploy:0.10.0
+          variables:
+            STACK_NAME: $STACK_NAME
+            TEMPLATE: deployment/aws/cloud-formation.yml
+            STACK_PARAMETERS: >
+              [
+                { ParameterKey: ClusterName, ParameterValue: $CLUSTER_NAME },
+                { ParameterKey: ServiceName, ParameterValue: $SERVICE_NAME },
+                { ParameterKey: EcrName, ParameterValue: $ECR_NAME },
+                { ParameterKey: CommitId, ParameterValue: $BITBUCKET_COMMIT },
+                { ParameterKey: HealthCheckPath, ParameterValue: $HEALTH_CHECK_PATH },
+                { ParameterKey: VpcId, ParameterValue: $VPC_ID },
+                { ParameterKey: SecurityGroups, ParameterValue: $SECURITY_GROUPS },
+                { ParameterKey: DesiredCount, ParameterValue: "$DESIRED_COUNT" },
+                { ParameterKey: Subnets, ParameterValue: "$SUBNETS" },
+                { ParameterKey: NamespaceId, ParameterValue: $NAMESPACE_ID },
+                { ParameterKey: LoadBalancerArn, ParameterValue: $LOAD_BALANCER_ARN },
+                { ParameterKey: CpuO2OTask, ParameterValue: "$CPU_O2O_TASK" },
+                { ParameterKey: MemoryO2OTask, ParameterValue: "$MEMORY_O2O_TASK" },
+                { ParameterKey: CpuQueueTask, ParameterValue: "$CPU_QUEUE_TASK" },
+                { ParameterKey: MemoryQueueTask, ParameterValue: "$MEMORY_QUEUE_TASK" },
+              ]
+            CAPABILITIES: ["CAPABILITY_IAM", "CAPABILITY_NAMED_IAM"]
+            WAIT: "true"
+
+    run-after-deploy: &run-after-deploy
+      name: Migrate
+      image: amazon/aws-cli:2.2.5
+      script:
+        - >
+          aws ecs run-task
+          --launch-type FARGATE
+          --cluster $CLUSTER_NAME
+          --task-definition $SERVICE_NAME
+          --group Migration
+          --overrides '{
+            "containerOverrides": [
+              {
+                "name": "'"$SERVICE_NAME"'",
+                "command": ["/usr/bin/php", "/var/www/html/artisan", "run:after-deploy"]
+              }
+            ]
+          }'
+          --count 1
+          --network-configuration '{
+            "awsvpcConfiguration": {
+              "assignPublicIp": "ENABLED",
+              "securityGroups": ["'"$SECURITY_GROUPS"'"],
+              "subnets": ["'"$SUBNET1"'", "'"$SUBNET2"'"]
+            }
+          }'
+
+pipelines:
+  branches:
+    develop:
+      - step:
+          <<: *build
+          deployment: DevelopBuild
+      - step:
+          <<: *deploy
+          deployment: DevelopDeploy
+      - step:
+          <<: *run-after-deploy
+          deployment: DevelopAfterDeploy
+    master:
+      - step:
+          <<: *build
+          deployment: ProductionBuild
+      - step:
+          <<: *deploy
+          deployment: ProductionDeploy
+      - step:
+          <<: *run-after-deploy
+          deployment: ProductionAfterDeploy

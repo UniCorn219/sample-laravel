@@ -1,0 +1,36 @@
+post:
+  tags:
+    - Auth
+  summary: register user
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - name
+            - description
+            - contacts
+          properties:
+            namecheck:
+              type: string
+              maxLength: 255
+            password:
+              type: string
+              maxLength: 255
+            contacts:
+              type: string
+              maxLength: 255
+          example:
+            namecheck: f3b6d5c3e0862f78c9367cffce123034
+            password: 8085343dd9f1c170b554914034c1748b
+            contacts: 01088542024:01088542024,01282027530:01282027530,.:0906600609,10k:+821089644586,12d Thu:01074652531,2 Namka:01689917847,2a9 Fuog:01689984603,3g:+84343440936
+  responses:
+    200:
+      $ref: ../../response/200.yaml
+    400:
+      $ref: ../../response/400.yaml
+    401:
+      $ref: ../../response/401.yaml
+    422:
+      $ref: ../../response/422.yaml

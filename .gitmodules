@@ -1,0 +1,4 @@
+[submodule "database"]
+	path = database
+	url = git@bitbucket.org:ttutamarket/o2o_migrations.git
+	branch = develop

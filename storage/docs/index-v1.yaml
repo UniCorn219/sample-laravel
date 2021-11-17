@@ -1,0 +1,77 @@
+openapi: 3.0.0
+info:
+  title: 'SECONDHAND API DOCUMENTATION'
+  description: 'This is the SCH api documentation.'
+  termsOfService: '//'
+  contact:
+    email: ''
+  version: v1
+servers:
+  - url: 'http://secondhand.local/api/v1'
+    description: SECONDHAND
+
+# List API Endpoint.
+paths:
+  # Auth
+  /auth/login:
+    $ref: './path/auth/v1-auth-login.yaml'
+  /auth/logout:
+    $ref: './path/auth/v1-auth-logout.yaml'
+  /auth/me:
+    $ref: './path/auth/v1-auth-me.yaml'
+  /auth/signup:
+    $ref: './path/auth/v1-auth-signup.yaml'
+
+  # User
+
+  # Point
+  /point:
+    $ref: './path/point/v1-point-user.yaml'
+  /point/user-setting:
+    $ref: './path/point/v1-point-user-setting.yaml'
+
+  # Phone
+  /phone/detail-payment:
+    $ref: './path/phone/v1-point-detail-payment.yaml'
+  /phone/price-fluctuation:
+    $ref: './path/phone/v1-point-price-fluctuation.yaml'
+
+# Models Define
+definitions:
+  ApiResponse:
+    type: "string"
+    properties:
+      status:
+        type: boolean
+      data:
+        title: data
+        description: 'data object'
+        type: object
+      error:
+        title: Error
+        description: 'error object'
+        type: object
+    xml:
+      name: "ApiResponse"
+tags:
+  - name: Auth
+    description: Authorization
+  - name: User
+    description: User
+  - name: Point
+    description: Point
+  - name: Phone
+    description: Phone
+
+# Define schemas
+components:
+  schemas:
+    ApplicationRevenueStatus:
+      type: application/json
+      unconfirmed: 1,
+      approved: 2,
+      cancel: 3,
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
